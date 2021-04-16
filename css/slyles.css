@@ -15,9 +15,9 @@
   --primary-bg-color: #ffffff;
   --accent-bg-color: #2f303a;
   --accent-bg-second-color: #f5f4fa;
-  --accent-bgi-color: #C4C4C4;
-  --primary-icon-color: #AFB1B8;
-  --border-image-color: #EEEEEE;
+  --accent-bgi-color: #c4c4c4;
+  --primary-icon-color: #afb1b8;
+  --border-image-color: #eeeeee;
 }
 
 body {
@@ -70,11 +70,10 @@ img {
 
 /* Оформление heder */
 .header {
-   padding-top: 24px;
-   padding-bottom: 25px;
+  padding-top: 24px;
+  padding-bottom: 25px;
 }
-.logo {  
-  display: inline-block;
+.logo {
   font-family: Raleway;
   font-style: normal;
   font-weight: 700;
@@ -99,6 +98,7 @@ img {
 } */
 .heder-nav {
   display: flex;
+  align-items: center;
 }
 .logo .logo-end {
   margin-right: 93px;
@@ -106,36 +106,51 @@ img {
 .site-nav {
   display: flex;
   align-items: center;
- }
+}
 .site-nav .nav-link {
   font-weight: 500;
   line-height: 1.14;
   letter-spacing: 0.02em;
   color: var(--title-text-color);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .site-nav .nav-link:hover,
 .site-nav .nav-link:focus {
   color: var(--accent-link-color);
 }
-.site-nav .nav-link.current {
+.nav-link.current {
+  display: inline-block;
   color: var(--accent-link-color);
 }
-.nav-item:not(:last-child) {
-  margin-right: 50px;
+.nav-link.current::after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 2px;
+  transform: translateY(30px);
 }
+.nav-item + .nav-item {
+  margin-left: 50px;
+}
+/* .nav-item:not(:last-child) {
+  margin-right: 50px;
+} */
 .header-contact {
   margin-left: auto;
 }
-.header-contact .nav-link{
+.header-contact .nav-link {
   display: flex;
 
   font-weight: 500;
   line-height: 1.14;
   letter-spacing: 0.02em;
   color: var(--primary-text-color);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .header-contact .nav-link:hover,
-.header-contact .nav-link:focus{
+.header-contact .nav-link:focus {
   color: var(--accent-link-color);
 }
 .contact-item {
@@ -163,7 +178,7 @@ img {
 }
 .nav-link:hover .icon,
 .nav-link:focus .icon {
-  fill: var(--accent-link-color)
+  fill: var(--accent-link-color);
 }
 
 /* Оформление main */
@@ -174,21 +189,23 @@ img {
   margin-left: auto;
   padding-top: 200px;
   padding-bottom: 200px;
-  
+
   background-color: var(--accent-bg-color);
-  background-image: linear-gradient(to left,  rgb(47, 48, 58, 0.4), rgb(47, 48, 58, 0.4)), url(../images/main/hero.jpg);
+  background-image: linear-gradient(
+      to left,
+      rgb(47, 48, 58, 0.4),
+      rgb(47, 48, 58, 0.4)
+    ),
+    url(../images/main/hero.jpg);
   background-repeat: no-repeat;
   background-position: center;
   /* background-size: 1600px; */
   background-size: cover;
   /* background-attachment: scroll; по умолчанию */
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    
+
   letter-spacing: 0.06em;
 }
-/* .hero .container {
-padding: 200px 0; 
-} */
 .hero-title {
   width: 696px;
   height: 120px;
@@ -220,6 +237,77 @@ padding: 200px 0;
   line-height: 1.88;
   letter-spacing: 0.06em;
   color: var(--primary-bg-color);
+
+  transform: scale(1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.hero-button:hover,
+.hero-button:focus {
+  transform: scale(1.1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+/* Модальное окно */
+.backdrop.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.2);
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(0.8);
+}
+.modal {
+  position: relative;
+  /* margin-right: auto;
+  margin-left: auto; */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  width: 528px;
+  height: 581px;
+  background-color: var(--primary-bg-color);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 4px;
+}
+.modal-close {
+  position: absolute;
+  right: 8px;
+  top: 8px;
+
+  width: 30px;
+  height: 30px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: var(--primary-bg-color);
+  border-radius: 50%;
+  cursor: pointer;
+}
+.modal-close:before,
+.modal-close:after {
+  content: ' ';
+  position: absolute;
+  height: 18px;
+  width: 2px;
+  background-color: var(--title-text-color);
+}
+.modal-close:before {
+  transform: rotate(45deg) translate(-6px, -6px);
+}
+.modal-close:after {
+  transform: rotate(-45deg) translate(6px, -6px);
 }
 
 /* section "Наши преимущества" */
@@ -308,9 +396,36 @@ padding: 200px 0;
 
 .activity-list {
   display: flex;
+  flex-wrap: wrap;
 }
-.activity-item:not(:last-child) {
+.activity-item + .activity-item {
+  margin-left: 30px;
+}
+.activity-item {
+  width: calc((100% - 30px * 2) / 3);
+  height: auto;
+
+  position: relative;
+  z-index: -1;
+}
+/* .activity-item:not(:last-child) {
   margin-right: 30px;
+} */
+.activity-text {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  padding-top: 27px;
+  padding-bottom: 27px;
+  background-color: rgba(47, 48, 58, 0.8);
+  text-align: center;
+
+  font-weight: 700;
+  line-height: 1.14;
+  text-transform: uppercase;
+  color: var(--primary-bg-color);
 }
 
 /* "Наша команда" */
@@ -334,13 +449,14 @@ padding: 200px 0;
 }
 .team-item {
   text-align: center;
-  
+
   width: calc((100% - 30px * 4) / 4);
   margin-left: 30px;
 
   background-color: var(--primary-bg-color);
-  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14), 0px 2px 1px rgba(0, 0, 0, 0.2);
- border-radius: 0px 0px 4px 4px;
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.12), 0px 1px 1px rgba(0, 0, 0, 0.14),
+    0px 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 0px 0px 4px 4px;
 }
 /* .team-item:not(:last-child) {
   margin-right: 30px;
@@ -369,7 +485,8 @@ padding: 200px 0;
   background-color: transparent;
   border-radius: 50%;
   width: 44px;
-  height: 44px; 
+  height: 44px;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .social-icons-link:hover,
 .social-icons-link:focus {
@@ -409,6 +526,7 @@ padding: 200px 0;
   border-radius: 4px;
   border: 1px solid var(--primary-icon-color);
   fill: var(--primary-icon-color);
+  transition: border 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .clients-link:hover,
 .clients-link:focus {
@@ -418,6 +536,7 @@ padding: 200px 0;
   width: 100%;
   height: 44px;
   fill: var(--primary-icon-color);
+  transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .clients-link:hover .clients-icons,
 .clients-link:focus .clients-icons {
@@ -446,6 +565,7 @@ padding: 200px 0;
   display: block;
   margin-bottom: 9px;
   color: var(--footer-text-color);
+  transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .footer-contact .link:hover,
 .footer-contact .link:focus {
@@ -468,6 +588,7 @@ padding: 200px 0;
 /* Footer icons */
 .social-icons-link.accent {
   background-color: rgba(255, 255, 255, 0.1);
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .social-icons-link.accent:hover,
 .social-icons-link.accent:focus {
@@ -482,7 +603,7 @@ padding: 200px 0;
 /* Страница "Портфолио" */
 /* Header portfolio */
 .page-portfolio {
-  border-bottom: 1px solid #ECECEC;
+  border-bottom: 1px solid #ececec;
 }
 /* Секция main portfolio*/
 .example {
@@ -494,9 +615,9 @@ padding: 200px 0;
   justify-content: center;
   margin-bottom: 50px;
 }
-.example-button { 
+.example-button {
   padding: 6px 22px;
-  border: none; 
+  border: none;
   font-family: inherit;
   font-weight: 500;
   font-size: 16px;
@@ -506,37 +627,69 @@ padding: 200px 0;
   background-color: var(--accent-bg-second-color);
   color: var(--title-text-color);
   cursor: pointer;
+  transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1),
+    color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 .example-button:hover,
 .example-button:focus {
   color: var(--primary-bg-color);
   background-color: var(--accent-link-color);
-  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08), 0px 2px 2px rgba(0, 0, 0, 0.12);
+  box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08),
+    0px 2px 2px rgba(0, 0, 0, 0.12);
 }
 .example-item:not(:last-child) {
   margin-right: 8px;
 }
 
-/* Works portfolio*/
+/* Works portfolio */
+/* Создание сетки секции portfolio */
 .work-list {
   display: flex;
   flex-wrap: wrap;
   margin-left: -30px;
+  margin-bottom: -30px;
 }
 .work-item {
-  width: calc((100% - 30px * 3) / 3 );
+  width: calc((100% - 30px * 3) / 3);
   height: 404px;
   margin-left: 30px;
-  margin-bottom: 30px;  
+  margin-bottom: 30px;
   background-size: cover;
   background-color: var(--primary-bg-color);
   border: 1px solid var(--border-image-color);
-  cursor: pointer;
 }
-.work-item:nth-last-child(-n+3) {
-  margin-bottom: 0px;
+.work-link {
 }
-.work-text {
+/* Создание overlay на карточку */
+.work-thumb {
+  position: relative;
+  overflow: hidden;
+}
+.work-link:hover .work-overlay,
+.work-link:focus .work-overlay {
+  transform: translateY(0);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+.work-img {
+}
+.work-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(33, 150, 243, 0.9);
+
+  transform: translateY(100%);
+  transition: transform 250ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  padding: 63px 24px;
+  font-size: 18px;
+  line-height: 1.56;
+  color: var(--primary-bg-color);
+}
+/* Оформление текста секции portfolio */
+.work-title {
   margin-top: 20px;
   margin-bottom: 4px;
   margin-left: 24px;
@@ -547,7 +700,7 @@ padding: 200px 0;
   line-height: 2;
   color: var(--title-text-color);
 }
-.work-link {
+.work-text {
   margin-left: 24px;
   margin-bottom: 20px;
 
@@ -555,10 +708,8 @@ padding: 200px 0;
   line-height: 1.88;
   color: var(--primary-text-color);
 }
-.work-item:hover {
-  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06), 1px 4px 6px rgba(0, 0, 0, 0.16);
-}
-.work-link:hover,
-.work-link:focus {
-  color: var(--accent-link-color); 
+.work-item:hover,
+.work-item:focus {
+  box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
+    1px 4px 6px rgba(0, 0, 0, 0.16);
 }

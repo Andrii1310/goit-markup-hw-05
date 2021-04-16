@@ -32,6 +32,7 @@
                         <a href="" class="nav-link">Контакты</a>
                     </li>
                 </ul>
+
             </nav>
 
             <ul class="header-contact">
@@ -61,10 +62,16 @@
 
             <div class="container">
                 <h1 class="hero-title">эффективные решения для вашего бизнеса</h1>
-                <button type="button" class="hero-button">Заказать услугу</button>
-            </div>
+                <button class="hero-button" type="button" data-modal-open>Заказать услугу</button>
+            </div>           
 
         </section>
+        <!-- Модальное окно -->
+        <div class="backdrop is-hidden" data-modal>
+            <div class="modal">                
+                <button class="modal-close" data-modal-close></button>
+            </div>            
+        </div>
         <!-- Наши преимущества -->
         <section class="advantages">
             <div class="container">
@@ -122,14 +129,17 @@
                 <ul class="activity-list">
                     <li class="activity-item">
                         <img class="activity-img" src="./images/main/box1.jpg" alt="Создание интелектуальных продуктов">
+                        <p class="activity-text">Десктопные приложения</p>
                     </li>
-                    <li class="activity-item">
 
+                    <li class="activity-item">
                         <img class="activity-img" src="./images/main/box2.jpg" alt="Адаптация для всех устройств">
+                        <p class="activity-text">Мобильные приложения</p>
                     </li>
 
                     <li class="activity-item">
                         <img class="activity-img" src="./images/main/box3.jpg" alt="Продвижение сайтов">
+                        <p class="activity-text">Дизайнерские решения</p>
                     </li>
                 </ul>
                 
@@ -399,6 +409,8 @@
                 </ul>
             </div>
         </div>
-    </footer>
+    </footer>    
+
+    <script src="./js/modal.js"></script>
 </body>
 </html>
